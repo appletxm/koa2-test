@@ -1,0 +1,5 @@
+{
+    "eslint.enable": true,
+    "javascript.format.enable": true,
+    "js/ts.implicitProjectConfig.experimentalDecorators": true
+}

@@ -1,16 +1,21 @@
 const Koa = require('koa');
 const app = new Koa();
-
-// 此处开始堆叠各种中间件
-//...
+const ipAddress = require('ip').address()
+const port = 5000
+// const host = '0.0.0.0'
+// const host = 'localhost'
+const chalk = require('chalk')
 
 app.use(ctx => {
-    ctx.body = 'Hello Koa';
+  ctx.body = 'Hello Koa';
 });
 
-app.listen(3000, () => {
-    console.info('server started.....');
+app.listen(port, () => {
+  console.info('...npm_package_name:' + process.env.npm_package_name);
+  console.info('...npm_lifecycle_event:', process.env.npm_lifecycle_event);
+  console.info('\n***************************')
+  console.info('server start from at')
+  console.info(`http://localhost:${port}`)
+  console.info(`http://${ipAddress}:${port}`)
+  console.info('***************************\n')
 });
-
-console.info(process.env.npm_package_name);
-console.info(process.env.npm_lifecycle_event);
