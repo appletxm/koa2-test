@@ -18,7 +18,7 @@ app.use(async (ctx, next) => {
 });
 
 app.use(async (ctx) => {
-  ctx.body = 'Hello World';
+  ctx.body = 'Hello World, i\'m worked now';
   ctx.cookies.set('name', 'tobi')
 });
 

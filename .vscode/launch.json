@@ -17,7 +17,7 @@
     },
 
     {
-      "name": "sso-config",
+      "name": "koa-dev",
       "type": "node",
       "request": "attach",
       "port": 3321,
