@@ -1,0 +1,79 @@
+{
+  "id": "1973761",
+  "name": "css3-h5-test",
+  "font_family": "c3h5-iconfont",
+  "css_prefix_text": "c3h5-",
+  "description": "用来测试css3,h5里边的部分功能",
+  "glyphs": [
+    {
+      "icon_id": "11249689",
+      "name": "colors",
+      "font_class": "colors",
+      "unicode": "e838",
+      "unicode_decimal": 59448
+    },
+    {
+      "icon_id": "8474287",
+      "name": "link",
+      "font_class": "link",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "11737041",
+      "name": "video",
+      "font_class": "video",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "980460",
+      "name": "image",
+      "font_class": "image",
+      "unicode": "e6fb",
+      "unicode_decimal": 59131
+    },
+    {
+      "icon_id": "167423",
+      "name": "bold",
+      "font_class": "bold",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "392034",
+      "name": "ALIGN MIDDLE",
+      "font_class": "alignmiddle",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "594070",
+      "name": "ALIGN LEFT",
+      "font_class": "alignleft",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "1261857",
+      "name": "italic",
+      "font_class": "italic",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    },
+    {
+      "icon_id": "1906251",
+      "name": "ALIGN RIGHT",
+      "font_class": "ALIGNRIGHT",
+      "unicode": "e6e3",
+      "unicode_decimal": 59107
+    },
+    {
+      "icon_id": "11348862",
+      "name": "a",
+      "font_class": "a",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

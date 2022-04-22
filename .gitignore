@@ -4,3 +4,5 @@ npm-debug.log
 *.back
 build
 .idea
+.env
+logs

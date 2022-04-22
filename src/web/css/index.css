@@ -1,0 +1,10 @@
+body {
+  font-size: .12rem;
+}
+
+.test-box {
+  background-color: purple;
+  color: white;
+  font-size: .16rem;
+  padding: .1rem;
+}

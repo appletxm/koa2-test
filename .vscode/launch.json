@@ -14,6 +14,17 @@
         "run-script", "debug"
       ],
       "port": 9229
+    },
+
+    {
+      "name": "sso-config",
+      "type": "node",
+      "request": "attach",
+      "port": 3321,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/src/",
+      "remoteRoot": "/app/src/",
+      "protocol": "inspector"
     }
   ]
 }
