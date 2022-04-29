@@ -4,6 +4,10 @@ const ipAddress = require('ip').address()
 const port = 5000
 const chalk = require('chalk')
 
+// const config = require('config')
+// console.log(config)
+// console.log('=====', process.env.NODE_ENV)
+
 app.use(async (ctx, next) => {
   await next();
   const rt = ctx.response.get('X-Response-Time');

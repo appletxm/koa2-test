@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  koa:
+    container_name: koa-app-dev
+    build:
+      context: .
+      dockerfile: ./dockerfile.dev
+    env_file:
+      - ./.dev.env
+    # environment:
+    #   - MY_TEST=99999
+    volumes:
+      # - /Users/appletxm/Desktop/me/test/koa2-test/src:/app/src
+      - ./src:/app/src
+    ports:
+      - 5000:5000
+    networks:
+      - koa-network
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo-dev
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    volumes:
+      - ./mongodata:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - koa-network
+  
+networks:
+  koa-network:
+    driver: bridge

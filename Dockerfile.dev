@@ -11,6 +11,6 @@ RUN npm install nodemon -g
 # COPY ./config ./src
 # CMD [ "nodemon", "--inspect=0.0.0.0:3321", "./src/index.js" ]
 # VOLUME /Users/appletxm/Desktop/me/test/koa2-test /app
-
+ENV my_new_test = '9999'
 EXPOSE 5000
 ENTRYPOINT [ "nodemon", "--inspect=0.0.0.0:3321", "./src/index.js" ]

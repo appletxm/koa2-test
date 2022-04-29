@@ -1,0 +1,141 @@
+stages:
+  - lint
+  - build
+  - upload
+
+lint:
+  image: node:12
+  stage: lint
+  script:
+    - npm ci
+    - npm run lint
+
+.build:
+  image: node:12
+  stage: build
+  script:
+    - npm ci
+    - NODE_ENV=$CI_ENVIRONMENT_NAME npm run build
+    - for file in build/*.js; do gzip < $file > $file.gz; done
+    - for file in build/*.css; do gzip < $file > $file.gz; done
+    - for file in build/*.html; do gzip < $file > $file.gz; done
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+
+build_dev:
+  environment:
+    name: development
+  extends:
+    - .build
+  only:
+    - merge_request
+    - master
+
+build_stg:
+  environment:
+    name: staging
+  only:
+    - merge_request
+    - master
+  extends:
+    - .build
+
+build_ppd:
+  environment:
+    name: preproduction
+  only:
+    - master
+  extends:
+    - .build
+
+build_prd:
+  environment:
+    name: production
+  only:
+    - tags
+  extends:
+    - .build
+
+.upload:
+  image: gcr.io/cloud-builders/gcloud
+  stage: upload
+  script:
+    - gcloud auth activate-service-account --key-file $GCLOUD_SA_KEY
+    - gsutil -h "Cache-Control:private, must-revalidate" -m cp -r build/*.js gs://${bucket}
+    - gsutil -h "Cache-Control:private, must-revalidate" -m cp -r build/*.css gs://${bucket}
+    - gsutil -h "Cache-Control:private, must-revalidate" -m cp -r build/*.html gs://${bucket}
+    - gsutil -h "Cache-Control:private, must-revalidate" -h "Content-Encoding:gzip" -m cp -r build/*.gz gs://${bucket}
+
+upload_dev_from_mr:
+  environment:
+    name: dev
+    url: https://sso-widget.devairasia.com
+  variables:
+    bucket: sso-widget.devairasia.com
+  dependencies:
+    - build_dev
+  only:
+    - merge_requests
+  extends:
+    - .upload
+  when: manual
+
+upload_dev:
+  environment:
+    name: dev
+    url: https://sso-widget.devairasia.com
+  variables:
+    bucket: sso-widget.devairasia.com
+  dependencies:
+    - build_dev
+  only:
+    - master
+  extends:
+    - .upload
+  allow_failure: false
+
+upload_stg:
+  environment:
+    name: stg
+    url: https://sso-widget.stgairasia.com
+  variables:
+    bucket: sso-widget.stgairasia.com
+  dependencies:
+    - build_stg
+  only:
+    - master
+    - merge_requests
+  extends:
+    - .upload
+  when: manual
+  allow_failure: false
+
+upload_ppd:
+  environment:
+    name: ppd
+    url: https://sso-widget.ppairasia.com
+  variables:
+    bucket: sso-widget-ppairasia-com
+  only:
+    - master
+  dependencies:
+    - build_ppd
+  extends:
+    - .upload
+  when: manual
+  allow_failure: false
+
+upload_prd:
+  environment:
+    name: prd
+    url: https://sso-widget.airasia.com
+  variables:
+    bucket: sso-widget.airasia.com
+  only:
+    - tags
+  dependencies:
+    - build_prd
+  extends:
+    - .upload
