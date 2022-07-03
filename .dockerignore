@@ -47,3 +47,6 @@ cache/
 # kubernetes
 /deployment
 Makefile
+
+# db
+mongodata
